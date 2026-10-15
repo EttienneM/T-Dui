@@ -1,0 +1,10 @@
+#!/bin/sh
+# Prints the build under test for party.py: Cargo.toml version and checked-out commit.
+cd "$(dirname "$0")/.." || exit 1
+version=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)
+sha=$(git rev-parse HEAD)
+warnings='[]'
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+  warnings='["working tree has uncommitted changes"]'
+fi
+printf '{"app_version": "%s", "deploy_sha": "%s", "warnings": %s}\n' "$version" "$sha" "$warnings"

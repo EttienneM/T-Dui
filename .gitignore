@@ -1,1 +1,4 @@
 /target
+# Test Party
+.claude/skills/test-party/tips.local.md
+__pycache__/

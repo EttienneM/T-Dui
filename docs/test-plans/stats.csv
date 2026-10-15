@@ -1,0 +1,16 @@
+Stats
+ID,Scenario,Action,Steps,Expected Result
+STA-001,Counts,"User checks the Stats tab from empty, then after creating, completing and deleting tasks","1. Launch the app with cargo run
+2. Press Shift+Right
+3. Press Shift+Left, then create Overdue (due 2020-01-01), Open A and Open B (no dates) and Finish me and Bin me (no dates)
+4. Complete Finish me with d and Enter; delete Bin me with - and Enter
+5. Press Shift+Right","2. Four panels titled 'Overdue', 'ToDo', 'Done' and 'Deleted' each show a large 0; ToDo is yellow and the others are cyan
+3. All five tasks are listed
+4. Three tasks remain: Overdue, Open A and Open B
+5. 'Overdue' shows a large red 1, 'ToDo' a yellow 3, 'Done' a cyan 1 and 'Deleted' a cyan 1"
+STA-002,Charts,User sees today's activity on the New Tasks chart,"1. Launch the app with cargo run
+2. Press Shift+Right and look at the middle panel
+3. Press Shift+Left, create Chart A and Chart B (no dates), complete Chart A with d and Enter
+4. Press Shift+Right","2. A panel titled 'New Tasks' shows a chart with the axis titles 'Days ago' and 'Count' and flat lines along the bottom
+3. Only Chart B is listed
+4. The yellow line rises at the right-hand (today) end of the chart and the cyan line also rises there"

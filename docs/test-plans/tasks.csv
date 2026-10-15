@@ -1,0 +1,106 @@
+Task Lifecycle
+ID,Scenario,Action,Steps,Expected Result
+TSK-001,Creating,"User creates a first task with a title, multi-line description and due date","1. Launch the app with cargo run
+2. Press +
+3. Type Buy milk
+4. Press Tab, type Full cream, press Alt+Enter, type 2 litres
+5. Press Tab, then type today's date as YYYY-MM-DD
+6. Press Enter
+7. Look at the Task panel","1. The List panel is empty and the Task panel says 'No task selected'
+2. A popup titled 'New Task' opens with the fields 'Title:', 'Description:' and 'Due Date (YYYY-MM-DD):', the 'Title:' line is yellow, and the hint line reads 'Tab: Switch | Enter: Save | Alt+Enter: New line | Ctrl+U/D or PgUp/Dn: Scroll desc | Esc: Cancel'
+3. The text appears after 'Title: '
+4. The description field turns yellow and shows Full cream and 2 litres on two separate lines
+5. The date field turns yellow and shows the date as typed
+6. The popup closes and the List shows '>> 1. Buy milk (Due: <today>)' in yellow
+7. The Task panel shows 'Title: Buy milk', 'Description:' followed by Full cream and 2 litres on separate lines, 'Due Date: <today>', 'Created:' with the current date and time, and 'Status: ○ Pending' in yellow"
+TSK-002,Creating,"User cancels a task, tries to save one without a title, then saves one with no due date","1. Launch the app with cargo run
+2. Press +, type Throwaway, press Esc
+3. Press +, press Tab, type a description only, press Enter
+4. Press +, type Call mum, press Enter
+5. Look at the Task panel","2. The popup closes and the List is still empty; the Task panel says 'No task selected'
+3. The popup closes and no task is added
+4. The List shows '>> 1. Call mum' with no due date and in the default colour
+5. The Task panel shows 'Title: Call mum' and 'Due Date: Not set'"
+TSK-003,Creating,"User fumbles the due date, then fixes it","1. Launch the app with cargo run
+2. Press +, type Dentist, press Tab twice to reach the date field
+3. Type abc
+4. Type 2099-13-45 and press Enter
+5. Press Enter on Dentist to edit it, press Tab twice, press Backspace until the date field is empty, type 2099-06-15
+6. Press Tab to go back to the Title field, then press Enter
+7. Look at the List and the Task panel","3. Nothing appears in the date field: letters are not accepted
+4. The popup closes, the List shows '1. Dentist' with no due date and the Task panel shows 'Due Date: Not set'
+5. A popup titled 'Edit Task' opens with 'Title: Dentist', and the date field shows 2099-06-15
+6. The popup closes
+7. The List shows '1. Dentist (Due: 2099-06-15)' and the Task panel shows 'Due Date: 2099-06-15'"
+TSK-004,Sorting and Navigation,User adds tasks in mixed order and finds them sorted by due date with colour cues,"1. Launch the app with cargo run
+2. Create these tasks in order with + (Tab twice to reach the date field): No date A (no date), Later (2099-12-31), Sooner (2099-01-01), No date B (no date), Old (2020-01-01), Today (today's date)
+3. Look at the List
+4. Press Up while 1. Old is selected
+5. Press Down
+6. Press Down three times","2. After each save the newly created task is the selected row (marked >>)
+3. The List reads in this order: '1. Old (Due: 2020-01-01)' in red, '2. Today (Due: <today>)' in yellow, '3. Sooner (Due: 2099-01-01)', '4. Later (Due: 2099-12-31)', '5. No date A', '6. No date B', with 3 to 6 in the default colour
+4. Selection wraps to '6. No date B' and the Task panel shows 'Title: No date B'
+5. Selection wraps back to '1. Old' and the Task panel shows 'Title: Old' and 'Due Date: 2020-01-01'
+6. Selection is on '4. Later' and the Task panel follows it, showing 'Title: Later'"
+TSK-005,Editing,"User edits a task, sees it re-sort, then abandons a second edit","1. Launch the app with cargo run. Create Alpha (due 2099-01-01) and Beta (due 2099-02-01)
+2. Select '1. Alpha' and press Enter
+3. Change the title to Alpha edited (Backspace and type), press Tab and type a description, press Tab and change the date to 2099-03-01, press Enter
+4. Look at the List and the Task panel
+5. Press Enter, change the title to Discard me, then press Esc
+6. Quit with q and launch the app again","2. A popup titled 'Edit Task' opens with 'Title: Alpha' and 'Due Date (YYYY-MM-DD): 2099-01-01' already filled in
+3. The popup closes
+4. The List reads '1. Beta (Due: 2099-02-01)' then '2. Alpha edited (Due: 2099-03-01)', the selection (>>) is on Alpha edited, and the Task panel shows the new title, description and 'Due Date: 2099-03-01'
+5. The popup closes and the task still reads Alpha edited
+6. The List still reads Beta then Alpha edited with the edited description and date"
+TSK-006,Editing,"User writes a long description, scrolls it while editing and while reading","1. Launch the app with cargo run
+2. Press +, type Long notes, press Tab, then type Line 1 to Line 20, pressing Alt+Enter between each
+3. Press PageUp twice, then PageDown twice
+4. Press Ctrl+U, then Ctrl+D
+5. Press Enter to save
+6. Press Tab twice to focus the Task panel, then press Down five times
+7. Press Up five times
+8. Create a second task Short, press Tab until the List is focused, press Up then Down to go back to Long notes","2. The description keeps scrolling so the line being typed and the cursor stay visible
+3. The description scrolls up towards Line 1, then back down
+4. The description scrolls up three lines, then back down
+5. The popup closes and the Task panel shows 'Description:' and the first lines of the description
+6. The Task panel border is cyan and the description scrolls down one line per press
+7. The description scrolls back to the top and stops at the top
+8. The Task panel shows Long notes from the top, starting at 'Description:' and Line 1"
+TSK-007,Completing,"User backs out of completing a task twice, then completes it","1. Launch the app with cargo run. Create First (due 2099-01-01, description Notes here) and Second (no date)
+2. Select '1. First' and press d
+3. Press Tab, then press Enter
+4. Press d, then press Esc
+5. Press d, press Right then Left, then press Enter
+6. Quit with q and launch the app again","2. A popup titled 'Done?' shows 'Title: First', 'Description:' with Notes here, 'Due Date: 2099-01-01', '[ Yes ]' highlighted in green, '[ No ]' and the hint 'Tab/Left/Right: Switch buttons | Enter: Confirm | Esc: Cancel'
+3. '[ No ]' becomes highlighted in red; after Enter the popup closes and First is still in the List
+4. The popup closes and First is still in the List
+5. Right highlights '[ No ]', Left highlights '[ Yes ]'; after Enter the popup closes, First is gone, the List reads '1. Second' and it is selected
+6. Only Second is listed"
+TSK-008,Deleting,"User backs out of deleting a task, then deletes every task","1. Launch the app with cargo run. Create Keep and Remove (no dates)
+2. Select '2. Remove' and press -
+3. Press Left, then press Enter
+4. Press -, then press Enter
+5. Press -, then press Enter
+6. Press d, then press -","2. A popup titled 'Delete?' shows 'Title: Remove', 'Description:', '[ Yes ]' highlighted in green, '[ No ]' and the hint 'Tab/Left/Right: Switch buttons | Enter: Confirm | Esc: Cancel'
+3. '[ No ]' becomes highlighted in red; after Enter the popup closes and Remove is still listed
+4. Remove is gone and the selection moves to '1. Keep'
+5. Keep is gone, the List is empty and the Task panel says 'No task selected'
+6. No popup opens"
+TSK-009,Completing,User can only complete or delete from the List panel,"1. Launch the app with cargo run. Create Guarded (no date)
+2. Press Tab to focus the Calendar, then press d and -
+3. Press Tab to focus the Task panel, then press d and -
+4. Press Tab to focus the List, then press d","2. No popup opens and Guarded is still listed
+3. No popup opens and Guarded is still listed
+4. The 'Done?' popup opens for Guarded"
+TSK-010,Persistence,"User completes and deletes tasks, adds another, and finds every task kept on disk","1. Launch the app with cargo run. Create Done one, Deleted one and Active one (no dates)
+2. Complete Done one with d and Enter; delete Deleted one with - and Enter
+3. Press q, then run cat ~/.local/share/tdui/todos.json
+4. Launch the app again
+5. Press + and create New one, then press q
+6. Run cat ~/.local/share/tdui/todos.json again
+7. Launch the app and press Shift+Right to open Stats","2. Only Active one is listed
+3. The file lists all three tasks: Done one has completed true and a completed_at timestamp, Deleted one has deleted true, Active one has both false
+4. Only Active one is listed
+5. The List reads '1. Active one' then '2. New one'
+6. The file still holds all four tasks, including Done one (completed true) and Deleted one (deleted true), and every task has a different id
+7. 'Done' shows 1, 'Deleted' shows 1 and 'ToDo' shows 2"

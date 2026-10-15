@@ -1,0 +1,29 @@
+Calendar
+ID,Scenario,Action,Steps,Expected Result
+CAL-001,Viewing,"User sees due dates, overdue dates and today marked across three months","1. Launch the app with cargo run
+2. Create Upcoming due on a later day in the current month (if today is the last day of the month, use the 1st of next month) and Late due on any day in the previous month
+3. Look at the Calendar panel without focusing it","1. The 'Calendar' panel shows three months side by side: last month, this month (with a bold month header) and next month, each with weekday headers; today is highlighted in cyan
+2. Both tasks appear in the List; Late is red
+3. Upcoming's due date has a dark grey background, Late's due date has a red background with bold text, and today is still highlighted in cyan; no date is highlighted yellow"
+CAL-002,Navigation,"User moves through the calendar by day and week, past the visible months, and returns to today","1. Launch the app with cargo run
+2. Press Tab to focus the Calendar
+3. Press Right, then Left
+4. Press Down, then Up
+5. Press Down until the selected date passes the end of the third (rightmost) month
+6. Press Up until the selected date passes the start of the first (leftmost) month
+7. Press t","2. The 'Calendar' border turns cyan and today is highlighted in yellow
+3. The yellow highlight moves one day forward, then back to today
+4. The yellow highlight moves one week down (same weekday), then back to today
+5. When the date leaves the rightmost month, all three months shift forward by one month so the selected date stays visible in yellow
+6. When the date leaves the leftmost month, all three months shift back by one month so the selected date stays visible in yellow
+7. The calendar shows last month, this month and next month again, and today is highlighted in yellow"
+CAL-003,Creating,User creates a task from a chosen calendar date,"1. Launch the app with cargo run
+2. Press Tab to focus the Calendar, press Right three times
+3. Press Enter
+4. Press Esc
+5. Press Enter again, type Planned, press Enter
+6. Press Tab twice to focus the List","2. The date three days from today is highlighted in yellow
+3. A popup titled 'New Task' opens with 'Due Date (YYYY-MM-DD):' already showing that date
+4. The popup closes and no task is added
+5. The popup closes and the List shows '1. Planned (Due: <that date>)'
+6. The Calendar shows the date with a dark grey background now that the yellow selection is hidden, and the Task panel shows 'Title: Planned'"
