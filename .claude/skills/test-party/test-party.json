@@ -1,0 +1,14 @@
+{
+  "remote": "origin",
+  "base_branch": "main",
+  "plans_dir": "docs/test-plans",
+  "parties_dir": "docs/test-parties",
+  "party_branch_prefix": "test-party/",
+  "commit_env": {},
+  "build": {
+    "command": [
+      "./scripts/build-info"
+    ]
+  },
+  "automation": null
+}

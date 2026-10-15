@@ -1,0 +1,24 @@
+App Shell and Navigation
+ID,Scenario,Action,Steps,Expected Result
+APP-001,Navigation,"User launches the app, cycles panels and tabs, then quits","1. Launch the app with cargo run
+2. Look at the tab bar, the three panels and the bottom line of the screen
+3. Press Tab
+4. Press Tab again
+5. Press Tab again
+6. Press Shift+Right
+7. Press Shift+Right again
+8. Press Shift+Left
+9. Press Shift+Left again, then press q","2. The tab bar shows 'Tasks' and 'Stats' with 'Tasks' highlighted in cyan; the 'List' panel is on the left with a cyan border, 'Calendar' is top right and 'Task' is bottom right, both with grey borders; the 'Task' panel says 'No task selected'; the footer reads '+ : new  d : done  - : delete  tab : panels  t : today  shift+←/→ : tabs'
+3. The 'Calendar' border turns cyan and the 'List' border turns grey
+4. The 'Task' border turns cyan and the 'Calendar' border turns grey
+5. Focus returns to 'List' (cyan border)
+6. 'Stats' is highlighted and the Stats tab is shown
+7. 'Tasks' is highlighted again and the three panels are back
+8. 'Stats' is highlighted
+9. 'Tasks' is highlighted, then the app exits and the terminal is restored to a normal prompt"
+APP-002,Navigation,"User quits with Esc, and Esc in a popup cancels the popup instead of quitting","1. Launch the app with cargo run
+2. Press + to open the new task popup
+3. Press Esc
+4. Press Esc again","2. A popup titled 'New Task' opens
+3. The popup closes and the app is still running on the Tasks tab
+4. The app exits and the terminal is restored to a normal prompt"
